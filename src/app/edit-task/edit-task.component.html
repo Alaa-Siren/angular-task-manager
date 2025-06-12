@@ -1,0 +1,25 @@
+<h1 class="title">Edit Task</h1>
+
+<form (submit)="editTask()" *ngIf="taskToEdit" class="task-form">
+  <label for="userId">User Id</label>
+  <input matInput id="userId" name="userId" type="text" [(ngModel)]="taskToEdit.userId">
+
+  <label for="id">Task Id</label>
+  <input matInput id="id" name="id" type="text" readonly [(ngModel)]="taskToEdit.id">
+
+  <label for="title">Title</label>
+  <input matInput id="title" name="title" type="text" [(ngModel)]="taskToEdit.title">
+
+  <mat-checkbox [(ngModel)]="taskToEdit.completed" name="completed" color="primary">
+    Completed
+  </mat-checkbox>
+
+
+  <button mat-raised-button color="primary" type="submit">Submit</button>
+</form>
+
+<button mat-stroked-button color="accent" type="button" (click)="goBack()">Back</button>
+
+<div *ngIf="editedTask" class="confirmation">
+  <h4>Task Updated Successfully</h4>
+</div>

@@ -1,0 +1,50 @@
+<div class="container">
+  <h2 class="dashboard-title">Tasks Dashboard</h2>
+
+  <div *ngIf="isLoading" class="spinner-container">
+    <mat-progress-spinner color="primary" mode="indeterminate"></mat-progress-spinner>
+  </div>
+
+  <div *ngIf="!isLoading">
+    <nav class="dashboard-nav">
+      <a routerLink="/add-task">
+        <button mat-raised-button color="primary">Add Task</button>
+      </a>
+    </nav>
+
+    <mat-paginator [pageSize]="10" [length]="tasks.length" (page)="onPageChange($event)"></mat-paginator>
+
+    <ul class="task-table">
+      <li class="table-header">
+        <span>User ID</span>
+        <span>Task ID</span>
+        <span>Title</span>
+        <span>Status</span>
+        <span>Edit</span>
+        <span>Delete</span>
+      </li>
+
+      <li class="table-row" *ngFor="let task of pagedTasks">
+        <span>{{ task.userId }}</span>
+        <span>{{ task.id }}</span>
+        <span>{{ task.title }}</span>
+        <span>
+          <mat-icon color="primary" *ngIf="task.completed">check_circle</mat-icon>
+          <mat-icon color="warn" *ngIf="!task.completed">radio_button_unchecked</mat-icon>
+        </span>
+        <span>
+          <a [routerLink]="['/edit-task', task.id]">
+            <button mat-mini-fab color="accent" aria-label="Edit Task">
+              <mat-icon>edit</mat-icon>
+            </button>
+          </a>
+        </span>
+        <span>
+          <button mat-mini-fab color="warn" (click)="delete(task)" aria-label="Delete Task">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </span>
+      </li>
+    </ul>
+  </div>
+</div>

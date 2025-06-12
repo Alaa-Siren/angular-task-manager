@@ -1,0 +1,25 @@
+<h1 class="title">Add Task</h1>
+
+<form [formGroup]="addForm" (submit)="submitTask()" class="task-form">
+  <label for="userId">User Id</label>
+  <input matInput id="userId" type="text" formControlName="userId">
+
+  <label for="id">Task Id</label>
+  <input matInput id="id" type="text" formControlName="id">
+
+  <label for="title">Title</label>
+  <input matInput id="title" type="text" formControlName="title">
+
+  <button mat-raised-button color="primary" type="submit">Add Task</button>
+  <button mat-stroked-button color="accent" type="button" (click)="goBack()">Back</button>
+</form>
+
+
+
+<div *ngIf="addedTask" class="added-task">
+  <h4>Task Added:</h4>
+  <span>User Id: {{ addedTask.userId }}</span>
+  <span>Task Id: {{ addedTask.id }}</span>
+  <span>Title: {{ addedTask.title }}</span>
+  <span>Status: {{ addedTask.completed ? '✅' : '❌' }}</span>
+</div>
